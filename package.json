@@ -1,0 +1,30 @@
+{
+  "name": "mini-demo",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "commit": "cz",
+    "lint": "eslint --config ./.eslintrc.js . --ext .js,.ts",
+    "lint:fix": "eslint --config ./.eslintrc.js . --ext .js,.ts --fix",
+    "prepare": "husky install",
+    "prettier": "prettier --write .",
+    "push": "cz && standard-version",
+    "release": "standard-version"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.0",
+    "standard-version": "^9.3.2"
+  }
+}

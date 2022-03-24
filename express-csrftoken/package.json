@@ -1,0 +1,19 @@
+{
+  "name": "express-csrftoken",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "shuisheng <2274751790@qq.com>",
+  "scripts": {
+    "start": "nodemon ./src/index.ts"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "crypto-js": "^4.1.1",
+    "csurf": "^1.11.0",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0"
+  }
+}
