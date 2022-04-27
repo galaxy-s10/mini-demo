@@ -1,6 +1,15 @@
 /** 模拟ajax请求 */
 export const mockAjax = async (flag?: boolean) => {
-  return new Promise((resolve, rejected) => {
+  return new Promise<{
+    code: number;
+    data?: {
+      id: number;
+      name: string;
+      age: number;
+      token: string;
+    };
+    msg?: string;
+  }>((resolve, rejected) => {
     setTimeout(() => {
       if (flag) {
         resolve({
@@ -9,7 +18,7 @@ export const mockAjax = async (flag?: boolean) => {
             id: 1,
             name: '张三',
             age: 18,
-            token: Math.random(),
+            token: Math.random().toString(),
           },
         });
       } else {

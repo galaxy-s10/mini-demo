@@ -1,19 +1,15 @@
+import { observer } from 'mobx-react';
 import { memo, useEffect, useState } from 'react';
 
 import style from './index.scss';
 
 import CardCpt from '@/components/Card';
-import { addNum, delNum } from '@/stores/counter';
-import { useAppSelector, useAppDispatch } from '@/stores/hooks';
-import { ajaxGetUserLogin } from '@/stores/user';
+import { useStores } from '@/stores';
 
 const Home = () => {
-  const counter = useAppSelector((state) => state.counter);
-  const user = useAppSelector((state) => state.user);
-
-  const dispatch = useAppDispatch();
-
+  console.log('home页面渲染了');
   const [title] = useState('home页面');
+  const { AppStore, UserStore } = useStores();
 
   useEffect(() => {
     console.log('Home生命周期');
@@ -21,26 +17,21 @@ const Home = () => {
 
   const ajaxHandle = async (id: number) => {
     try {
-      // 注意，只要dispatch有结果，都会走resolve，除非里面抛出了异常。
-      const res = await dispatch(ajaxGetUserLogin({ id }));
-      // @ts-ignore
-      if (res.error) {
-        console.log('ajaxHandle失败', res.payload);
-      } else {
-        console.log('ajaxHandle成功', res.payload);
-      }
+      const res = await UserStore.userLogin(id);
+      console.log('ajaxHandle成功', res);
     } catch (error) {
-      console.log('捕获到异常', error);
+      console.log('ajaxHandle失败', error);
     }
   };
 
   return (
     <div className={style.home}>
       <h1>{title}</h1>
-      <div>redux的counter：{JSON.stringify(counter)}</div>
-      <div>redux的user：{JSON.stringify(user)}</div>
-      <button onClick={() => dispatch(addNum(1))}>加一</button>
-      <button onClick={() => dispatch(delNum(2))}>减二</button>
+      <div>mobx的app:{JSON.stringify(AppStore)}</div>
+      <div>mobx的user:{JSON.stringify(UserStore)}</div>
+      <button onClick={() => AppStore.setVersion(Math.random().toString())}>
+        setVersion
+      </button>
       <button onClick={() => ajaxHandle(1)}>模拟异步请求成功</button>
       <button onClick={() => ajaxHandle(2)}>模拟异步请求失败</button>
       <CardCpt></CardCpt>
@@ -48,4 +39,4 @@ const Home = () => {
   );
 };
 
-export default memo(Home);
+export default memo(observer(Home));
