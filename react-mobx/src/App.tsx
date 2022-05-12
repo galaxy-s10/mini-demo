@@ -1,75 +1,47 @@
-import { observer } from 'mobx-react';
-import React, { memo, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { memo, useState } from 'react';
 
-import { outputStaticUrl } from '../config/utils/outputStaticUrl';
-
-import Loading from '@/components/Loading';
-import Home from '@/pages/home';
-import NotFound from '@/pages/notFound';
-import '@/assets/css/index.scss';
-
-const Login = React.lazy(() => import('@/pages/login'));
-const About = React.lazy(() => import('@/pages/about'));
-const TestPage = React.lazy(() => import('@/pages/test'));
+import useLocalStorageState from '@/hooks/useLocalStorageState';
+import useUpdate from '@/hooks/useUpdate';
 
 const App = () => {
-  useEffect(() => {
-    console.log('App生命周期');
-  }, []);
+  console.log('App渲染了');
+  let count = 1;
 
+  const addCount = () => {
+    count += 100;
+    console.log(count);
+  };
+
+  // const [, setRender] = useState({});
+  // const forceUpdate = () => {
+  //   setRender({});
+  // };
+
+  const forceUpdate = useUpdate();
+
+  const [myToken, setMyToken] = useLocalStorageState('token', '1ss');
+
+  // const [arr, setArr] = useLocalStorageState('arr-key', [2, '3', '4']);
+  // console.log(myToken, setMyToken, 1111);
   return (
-    <BrowserRouter basename={outputStaticUrl()}>
+    <div>
+      <div>count:{count}</div>
+      <div>myToken:{myToken}</div>
+      {/* <div>arr:{arr}</div> */}
       <div>
-        <Link to="/">点击跳转首页</Link>
-      </div>
-      <div>
-        <Link to="/login">点击跳转login</Link>
-      </div>
-      <div>
-        <Link to="/about">点击跳转about</Link>
-      </div>
-      <div>
-        <Link to="/test">context和全局变量区别</Link>
-      </div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={
-            <React.Suspense fallback={<Loading />}>
-              <Login />
-            </React.Suspense>
-          }
+        <input
+          value={myToken}
+          onChange={(e) => {
+            console.log(typeof e.target.value, 3333);
+            setMyToken(e.target.value);
+          }}
         />
-        <Route
-          path="/home"
-          element={
-            <React.Suspense fallback={<Loading />}>
-              <Home />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <React.Suspense fallback={<Loading />}>
-              <About />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/test"
-          element={
-            <React.Suspense fallback={<Loading />}>
-              <TestPage />
-            </React.Suspense>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+        <button onClick={() => setMyToken(undefined)}>清除token</button>
+        <button onClick={() => addCount()}>+1</button>
+        <button onClick={() => forceUpdate()}>forceUpdate</button>
+      </div>
+    </div>
   );
 };
 
-export default memo(observer(App));
+export default memo(App);

@@ -16,7 +16,7 @@ const Home = () => {
   const [title] = useState('home页面');
 
   useEffect(() => {
-    console.log('Home生命周期');
+    console.log('Home页面生命周期mounted');
   }, []);
 
   const ajaxHandle = async (id: number) => {

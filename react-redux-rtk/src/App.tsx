@@ -3,7 +3,9 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
 import { outputStaticUrl } from '../config/utils/outputStaticUrl';
+import style from './index.scss';
 
+import authorJpg from '@/assets/img/author.jpg';
 import Loading from '@/components/Loading';
 import Home from '@/pages/home';
 import NotFound from '@/pages/notFound';
@@ -15,11 +17,19 @@ const About = React.lazy(() => import('@/pages/about'));
 
 const App = () => {
   useEffect(() => {
-    console.log('App生命周期');
+    console.log('App页面生命周期mounted');
   }, []);
+
+  const customStyle: React.CSSProperties = {
+    display: 'block',
+    width: '100px',
+    textAlign: 'center',
+  };
 
   return (
     <Provider store={store}>
+      <img src={authorJpg} style={customStyle} alt="" />
+      <div className={style.myfont}>MIUI 13 采用全新系统字体 MiSans</div>
       <BrowserRouter basename={outputStaticUrl()}>
         <div>
           <Link to="/">点击跳转首页</Link>

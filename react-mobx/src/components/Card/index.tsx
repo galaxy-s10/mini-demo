@@ -3,7 +3,7 @@ import { memo, useEffect } from 'react';
 
 import style from './index.scss';
 
-// import BabyCpt from '@/components/Baby';
+import BabyCpt from '@/components/Baby';
 import { AppStore, UserStore, useStores } from '@/stores';
 
 const Card = (props) => {
@@ -17,9 +17,9 @@ const Card = (props) => {
   return (
     <div className={style.card}>
       Card组件
-      {/* <div>mobx的app：{JSON.stringify(AppStore)}</div>
-      <div>mobx的user：{JSON.stringify(UserStore)}</div> */}
-      {/* <BabyCpt></BabyCpt> */}
+      <div>mobx的app：{JSON.stringify(AppStore)}</div>
+      <div>mobx的user：{JSON.stringify(UserStore)}</div>
+      <BabyCpt></BabyCpt>
     </div>
   );
 };

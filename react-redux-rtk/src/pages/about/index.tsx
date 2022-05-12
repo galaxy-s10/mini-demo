@@ -1,25 +1,16 @@
-import React, { memo, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 
 import style from './index.scss';
 
-import authorJpg from '@/assets/img/author.jpg';
-
 const Home = () => {
   useEffect(() => {
-    console.log('About生命周期');
+    console.log('About页面生命周期mounted');
   }, []);
-
-  const customStyle: React.CSSProperties = {
-    display: 'block',
-    width: '100px',
-    textAlign: 'center',
-  };
 
   return (
     <div className={style.about}>
       <h1>about页面</h1>
-      <div className={style.myfont}>MIUI 13 采用全新系统字体 MiSans</div>
-      <img src={authorJpg} style={customStyle} alt="" />
+      <p>关于我！</p>
     </div>
   );
 };
