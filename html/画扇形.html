@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>random-rad-sector</title>
+  <style>
+    #sector {
+      width: 320px;
+      height: 320px;
+      border-radius: 100%;
+      background-image: linear-gradient(0deg, #f2c6ff 0%, #caf8ff 100%);
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="sector"></div>
+  <div>
+    <label for="origin">原点角度</label>
+    <input id="origin" name="origin" type="number" value="0" />
+  </div>
+  </div>
+  <label for="extension">延伸角度</label>
+  <input id="extension" name="extension" type="number" value="90" />
+  </div>
+  <script type="text/javascript">
+    // copy by:https://juejin.cn/post/6956090153144156174
+    var sectorEl = document.getElementById('sector');
+    var originEl = document.getElementById('origin');
+    var extensionEl = document.getElementById('extension');
+    originEl.oninput = extensionEl.oninput = updateSector;
+    function updateSector() {
+      // 获取角度
+      var originAngle = Number(originEl.value);
+      var extensionAngle = Number(extensionEl.value);
+      var angleRange = [originAngle, originAngle + extensionAngle];
+      console.log(angleRange)
+      // 定义驻点
+      var points = {
+        0: "100% 50%",
+        45: `100% 0%`,
+        90: `50% 0%`,
+        135: `0% 0%`,
+        180: `0% 50%`,
+        225: `0% 100%`,
+        270: `50% 100%`,
+        315: `100% 100%`,
+      };
+      var clipPoints = [];
+      for (var pointIndex = 0; pointIndex < 17; pointIndex++) {
+        var pointAngle = pointIndex * 45;
+        var pointAngleKey = pointAngle % 360;
+        if (
+          angleRange[0] <= pointAngle &&
+          angleRange[1] >= pointAngle
+        ) {
+          var clipPoint = points[pointAngleKey];
+          clipPoints.push(clipPoint);
+          if (clipPoints.length >= 8) break;
+        } else if (clipPoints.length > 0) {
+          break;
+        }
+      }
+      //
+      var clipPointStartXY = {
+        x: 160 * 10 * Math.cos(angleRange[0] / 360 * 2 * Math.PI),
+        y: 160 * 10 * Math.sin(angleRange[0] / 360 * 2 * Math.PI)
+      }
+      var clipPointFinishXY = {
+        x: 160 * 10 * Math.cos(angleRange[1] / 360 * 2 * Math.PI),
+        y: 160 * 10 * Math.sin(angleRange[1] / 360 * 2 * Math.PI)
+      };
+      var clipPointStart = `${clipPointStartXY.x + 160}px ${-clipPointStartXY.y + 160}px`;
+      var clipPointFinish = `${clipPointFinishXY.x + 160}px ${-clipPointFinishXY.y + 160}px`;
+      var clipPointCenter = "50% 50%";
+      //
+      var clipPointsAll = [
+        clipPointStart,
+        ...clipPoints,
+        clipPointFinish,
+        clipPointCenter,
+        clipPointStart,
+      ].join(",");
+      //
+      sectorEl.style['clip-path'] = `polygon(${clipPointsAll})`;
+    }
+
+    updateSector()
+
+  </script>
+</body>
+
+</html>
