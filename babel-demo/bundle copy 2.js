@@ -1,5 +1,3 @@
-import _defineProperty from '@babel/runtime/helpers/defineProperty';
-
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -34,6 +32,20 @@ function _objectSpread(target) {
         });
   }
   return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
 }
 
 // import { sum } from './foo';
