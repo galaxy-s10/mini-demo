@@ -20,7 +20,11 @@
   "dependencies": {
     "@babel/cli": "^7.18.9",
     "@babel/runtime": "^7.18.9",
+    "@vueuse/components": "^8.9.4",
     "@vueuse/core": "^8.9.4",
+    "advjssdk": "^1.0.2",
+    "billd-ui": "^1.2.5",
+    "core-js": "^3.24.0",
     "redux": "^4.2.0"
   },
   "devDependencies": {
