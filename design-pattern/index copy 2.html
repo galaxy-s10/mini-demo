@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">btn</button>
+
+    <script>
+      const btnEl = document.getElementById('btn');
+
+      const createToast = function () {
+        const div = document.createElement('div');
+        div.innerHTML = 'toast';
+        div.style.display = 'none';
+        document.body.appendChild(div);
+        return div;
+      };
+
+      const createModal = function () {
+        const div = document.createElement('div');
+        div.innerHTML = 'modal';
+        div.style.display = 'none';
+        document.body.appendChild(div);
+        return div;
+      };
+
+      const getInstance = (fn) => {
+        let _instance;
+        return function () {
+          if (_instance) return _instance;
+          _instance = fn.call(this, arguments);
+          return _instance;
+        };
+      };
+
+      const createToastDiv = getInstance(createToast);
+      const createModalDiv = getInstance(createModal);
+
+      btnEl.addEventListener('click', function () {
+        const toast = createToastDiv();
+        const modal = createModalDiv();
+        toast.style.display = 'block';
+        modal.style.display = 'block';
+      });
+    </script>
+  </body>
+</html>

@@ -1,20 +1,27 @@
-const Singleton = function (model) {
-  this.model = model;
+function add(a, b) {
+  return a + b;
+}
+function sub(a, b) {
+  return a - b;
+}
+function mul(a, b) {
+  return a * b;
+}
+function div(a, b) {
+  return a / b;
+}
+
+let Calculator = {
+  add(a, b) {
+    return a + b;
+  },
+  sub(a, b) {
+    return a - b;
+  },
+  mul(a, b) {
+    return a * b;
+  },
+  div(a, b) {
+    return a / b;
+  },
 };
-
-const ProxySingleton = (function () {
-  let _instant;
-  return function (model) {
-    if (_instant) return _instant;
-    _instant = new Singleton(model);
-    return _instant;
-  };
-})();
-
-// const store1 = new ProxySingleton('home');
-// const store2 = new ProxySingleton('login');
-
-// console.log(decodeURIComponent(import.meta.url));
-// console.log(store1);
-// console.log(store2);
-// console.log(store1 === store2); //true
