@@ -1,0 +1,15 @@
+{
+  "name": "rollup-mini",
+  "version": "1.0.0",
+  "scripts": {
+    "build:js": "rollup -c rollup.config.js",
+    "build:ts": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "dependencies": {
+    "@rollup/plugin-typescript": "^8",
+    "rollup": "^2",
+    "@types/node": "^18.0.6",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.4"
+  }
+}

@@ -5,8 +5,30 @@
       <router-link to="/about">About</router-link>
     </nav>
     <router-view />
+    <div>
+      {{ obj }}
+    </div>
+    <button @click="editObj">通过数组下标修改</button>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      obj: { age: 18 },
+    };
+  },
+  methods: {
+    editObj() {
+      // this.obj.sex = 1; // 不是响应式的
+      this.$set(this.obj, 'sex', 1); // 是响应式的
+      // this.obj = { sex: 1 }; // 是响应式的
+      console.log(this.obj);
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
