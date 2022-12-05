@@ -1,9 +1,18 @@
 import path from 'path';
-
-export default {
-  input: path.resolve(__dirname, './index.js'),
-  output: {
-    file: path.resolve(__dirname, './jsdist/index.js'),
-    format: 'es',
+import { defineConfig } from 'rollup';
+export default defineConfig([
+  {
+    input: path.resolve(__dirname, './index.ts'),
+    output: {
+      file: path.resolve(__dirname, './jsdist/index.mjs'),
+      format: 'es',
+    },
   },
-};
+  {
+    input: path.resolve(__dirname, './index.ts'),
+    output: {
+      file: path.resolve(__dirname, './jsdist/index.cjs'),
+      format: 'cjs',
+    },
+  },
+]);

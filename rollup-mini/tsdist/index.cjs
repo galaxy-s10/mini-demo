@@ -1,3 +1,5 @@
+'use strict';
+
 // export const aaa = 22;
 // import del from 'del';
 // const del = require('del');
@@ -7,6 +9,8 @@
 //   // console.log(del);
 // }
 
-export default 1;
+var index = 1;
 
 // export const a = 1;
+
+module.exports = index;
